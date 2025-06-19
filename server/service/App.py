@@ -125,6 +125,11 @@ graph.set_entry_point("symptom_checker")
 
 built_graph = graph.compile(checkpointer=memory)
 
+def get_user_graph(user_id):
+    conn = sqlite3.connect(f"user_{user_id}.sqlite", check_same_thread=False)
+    memory = SqliteSaver(conn)
+    return graph.compile(checkpointer=memory)
+
 
 if __name__ == '__main__':
 

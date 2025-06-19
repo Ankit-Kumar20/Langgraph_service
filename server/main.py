@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Body
-from .service import built_graph, HumanMessage
+from .service import built_graph, HumanMessage, get_user_graph
 from typing import TypedDict
 
 app = FastAPI()
@@ -10,11 +10,13 @@ async def root():
 
 @app.post('/service')
 async def service(user_input: dict = Body(...)):
-    User = user_input['user_id']
+    user_id = user_input['user_id']
     print(user_input['query'])
     config = {"configurable": {
         "thread_id": "symptom_session_1"
     }}
+
+    built_graph = get_user_graph(user_id)
 
     result = built_graph.invoke({
         "messages": [HumanMessage(content=user_input["query"])]
