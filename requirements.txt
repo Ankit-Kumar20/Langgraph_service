@@ -1,0 +1,6 @@
+langgraph
+langchain-openai
+langgraph-tavily
+fastapi
+langgraph-checkpoint-sqlite
+uvicorn
